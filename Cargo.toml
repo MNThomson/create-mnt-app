@@ -1,0 +1,11 @@
+[package]
+name = "create-mnt-app"
+version = "0.1.0"
+edition = "2021"
+
+[toolchain]
+channel = "stable"
+
+[[bin]]
+name="create-mnt-app"
+path = "cli/cli.rs"
