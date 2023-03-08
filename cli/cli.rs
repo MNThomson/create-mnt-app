@@ -2,8 +2,8 @@ use dialoguer::{theme::ColorfulTheme, Input, Select};
 use names::Generator;
 use serde::Serialize;
 use std::str::FromStr;
-use strum::IntoEnumIterator;
-use strum_macros::{Display, EnumIter, EnumString};
+use strum::{EnumCount, IntoEnumIterator};
+use strum_macros::{Display, EnumCount, EnumIter, EnumString};
 
 use base::setup_base;
 
@@ -12,7 +12,7 @@ mod base;
 mod template_files;
 mod update;
 
-#[derive(Debug, EnumString, Display, Serialize, EnumIter)]
+#[derive(Debug, EnumString, Display, Serialize, EnumIter, EnumCount)]
 pub enum Template {
     Base,
 }
@@ -51,7 +51,7 @@ fn user_input() -> BaseTemplateOptions {
     }
 
     //Choose template
-    let template_selections: [String; 4] = Template::iter()
+    let template_selections: [String; Template::COUNT] = Template::iter()
         .collect::<Vec<Template>>()
         .iter()
         .map(|x| x.to_string())
