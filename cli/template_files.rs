@@ -16,15 +16,15 @@ pub fn templates_files<T: RustEmbed, S: Serialize>(project_name: String, context
 
         let rendered_contents = Tera::one_off(
             filecontents,
-            &Context::from_serialize(&context).expect("Cannot serialize struct"),
+            &Context::from_serialize(context).expect("Cannot serialize struct"),
             true,
         )
         .unwrap();
-        if rendered_contents.trim().len() == 0 {
+        if rendered_contents.trim().is_empty() {
             continue;
         }
 
-        fs::create_dir_all(&Path::new(&filepath).parent().unwrap()).ok();
+        fs::create_dir_all(Path::new(&filepath).parent().unwrap()).ok();
         fs::write(filepath, rendered_contents).expect("Couldn't write file");
     }
 }

@@ -9,6 +9,7 @@ use utils::choose_enum;
 
 mod api;
 mod base;
+mod database;
 mod template_files;
 mod utils;
 mod web;
@@ -17,6 +18,7 @@ mod web;
 pub enum Categories {
     Web,
     Api,
+    Database,
     Base,
 }
 
@@ -33,6 +35,7 @@ fn main() {
     match base_options.template {
         Categories::Web => web::setup_web(base_options),
         Categories::Api => api::setup_api(base_options),
+        Categories::Database => database::setup_database(base_options),
         Categories::Base => base::template_base(base_options),
     }
 }
@@ -64,6 +67,6 @@ fn user_input() -> BaseTemplateOptions {
     return BaseTemplateOptions {
         project_name: project_name,
         template: template,
-        init_git: if init_git == 0 { true } else { false },
+        init_git: init_git == 0,
     };
 }

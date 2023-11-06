@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  fastapi:
+    build: .
+    container_name: fastapi
+    volumes:
+      - ./:/app ## FOR DEV HOT RELOADING
+    ports:
+      - 3000:3000

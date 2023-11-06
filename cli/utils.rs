@@ -8,7 +8,7 @@ where
     <T as FromStr>::Err: std::fmt::Debug,
 {
     // Choose template
-    let template_selections: Vec<String> = T::iter().map(|x| x.to_string()).collect();
+    let template_selections: Vec<String> = T::iter().map(|x| return x.to_string()).collect();
 
     let template = Select::with_theme(&ColorfulTheme::default())
         .with_prompt("Template?")
@@ -17,5 +17,5 @@ where
         .interact()
         .unwrap();
 
-    T::from_str(&template_selections[template]).unwrap()
+    return T::from_str(&template_selections[template]).unwrap();
 }

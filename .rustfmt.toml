@@ -1,4 +1,1 @@
-# https://rust-lang.github.io/rustfmt/?version=master
 group_imports = "StdExternalCrate"
-# imports_granularity = "Item"
-# imports_layout = "Vertical"

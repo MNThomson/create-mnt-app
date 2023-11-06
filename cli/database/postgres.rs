@@ -6,26 +6,26 @@ use crate::{base::template_base, template_files::templates_files, BaseTemplateOp
 use std::fs;
 
 #[derive(RustEmbed)]
-#[folder = "templates/api/fastapi"]
-struct FastapiTemplateFolder;
+#[folder = "templates/database/postgres"]
+struct PostgresTemplateFolder;
 
 #[derive(Serialize)]
-struct FastapiOptions {
+struct PostgresOptions {
     base: BaseTemplateOptions,
 }
 
-fn template_fastapi(base: BaseTemplateOptions) {
+fn template_postgres(base: BaseTemplateOptions) {
     let spinner: Spinach = Spinach::new("Generating Content");
 
     template_base(base.clone());
 
     fs::create_dir_all(&base.project_name).ok();
-    let context: FastapiOptions = FastapiOptions { base: base.clone() };
+    let context: PostgresOptions = PostgresOptions { base: base.clone() };
 
-    templates_files::<FastapiTemplateFolder, FastapiOptions>(base.project_name, &context);
+    templates_files::<PostgresTemplateFolder, PostgresOptions>(base.project_name, &context);
     spinner.succeed("Done Generating!");
 }
 
-pub fn setup_fastapi(base: BaseTemplateOptions) {
-    template_fastapi(base);
+pub fn setup_postgres(base: BaseTemplateOptions) {
+    template_postgres(base);
 }

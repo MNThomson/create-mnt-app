@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  postgres:
+    image: rapidfort/postgresql
+    container_name: postgres_database
+    restart: always
+    volumes:
+      - postgresql_data:/bitnami/postgresql
+    environment:
+      POSTGRES_USER: demouser
+      POSTGRES_PASSWORD: demopass
+      POSTGRES_DB: demodb
+    ports:
+      - 5432:5432
+
+
+volumes:
+  postgresql_data:
+    driver: local
