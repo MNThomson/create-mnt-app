@@ -2,7 +2,10 @@ use rust_embed::RustEmbed;
 use serde::Serialize;
 use spinach::Spinach;
 
-use crate::{base::template_base, template_files::templates_files, BaseTemplateOptions};
+use crate::{
+    base::template_base, language::typescript::setup_typescript, template_files::templates_files,
+    BaseTemplateOptions,
+};
 use std::fs;
 
 #[derive(RustEmbed)]
@@ -16,10 +19,11 @@ struct ExpressOptions {
 
 fn template_express(base: BaseTemplateOptions) {
     let spinner: Spinach = Spinach::new("Generating Content");
+    fs::create_dir_all(&base.project_name).ok();
 
     template_base(base.clone());
+    setup_typescript(base.clone());
 
-    fs::create_dir_all(&base.project_name).ok();
     let context: ExpressOptions = ExpressOptions { base: base.clone() };
 
     templates_files::<ExpressTemplateFolder, ExpressOptions>(base.project_name, &context);

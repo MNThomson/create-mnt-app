@@ -2,7 +2,10 @@ use rust_embed::RustEmbed;
 use serde::Serialize;
 use spinach::Spinach;
 
-use crate::{base::template_base, template_files::templates_files, BaseTemplateOptions};
+use crate::{
+    base::template_base, language::python::setup_python, template_files::templates_files,
+    BaseTemplateOptions,
+};
 use std::fs;
 
 #[derive(RustEmbed)]
@@ -20,6 +23,7 @@ fn template_fastapi(base: BaseTemplateOptions) {
     fs::create_dir_all(&base.project_name).ok();
 
     template_base(base.clone());
+    setup_python(base.clone());
 
     let context: FastapiOptions = FastapiOptions { base: base.clone() };
 

@@ -3,7 +3,10 @@ use rust_embed::RustEmbed;
 use serde::Serialize;
 use spinach::Spinach;
 
-use crate::{base::template_base, template_files::templates_files, BaseTemplateOptions};
+use crate::{
+    base::template_base, language::typescript::setup_typescript, template_files::templates_files,
+    BaseTemplateOptions,
+};
 use std::fs;
 
 #[derive(RustEmbed)]
@@ -20,6 +23,7 @@ fn template_astro(base: BaseTemplateOptions) {
     let spinner = Spinach::new("Generating Content");
 
     template_base(base.clone());
+    setup_typescript(base.clone());
 
     fs::create_dir_all(&base.project_name).ok();
     let context: AstroOptions = AstroOptions {

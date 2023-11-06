@@ -2,9 +2,9 @@ use crate::{utils::choose_enum, BaseTemplateOptions};
 use serde::Serialize;
 use strum_macros::{Display, EnumCount, EnumIter, EnumString};
 
-mod go;
-mod python;
-mod typescript;
+pub mod go;
+pub mod python;
+pub mod typescript;
 
 #[derive(Debug, EnumString, Display, Serialize, EnumIter, EnumCount, Clone)]
 pub enum LanguageTemplates {
