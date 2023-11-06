@@ -1,0 +1,161 @@
+.base {
+    background-color: #1d1f20;
+    color: white;
+    font-family: 'roboto';
+    padding: 4em 0em 0em 0em;
+    font-size: 1.2em;
+}
+
+
+::-moz-selection {
+    /* Code for Firefox */
+    color: black;
+    background: #ff9e40;
+}
+
+::selection {
+    color: black;
+    background: #ff9e40;
+}
+
+
+h1 {
+    font-size: 3.1em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+p {
+    font-size: 1.2em;
+}
+
+.center {
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+}
+
+.column {
+    display: flex;
+    flex-direction: row;
+}
+
+@media (pointer:coarse),
+(max-width: 1000px) {
+    .column {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.forcerow {
+    flex-direction: row;
+}
+
+.button {
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+}
+
+.cratesbutton {
+    background-color: #b04b06
+}
+
+.ghbutton {
+    background-color: #0d1117
+}
+
+.orange {
+    color: orange;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+/* The following is entirely inspired/an adaptation of the
+Cloudflare Workers Docs: https://workers.cloudflare.com/ */
+.illustration {
+    perspective: 1500px;
+    margin-bottom: 1em;
+}
+
+.illustration-card {
+    transform: rotate3d(.5, -.866, 0, 15deg) rotateZ(1deg);
+    box-shadow: 2em 4em 6em -2em rgb(0, 0, 0, .5), 1em 2em 3.5em -2.5em rgba(0, 0, 0, .5);
+    border-radius: .5em;
+    will-change: transform;
+    transition: transform .4s ease, box-shadow .4s ease;
+}
+
+@media (hover: hover) {
+    .illustration:hover .illustration-card {
+        transform: rotate3d(0, 0, 0, 0deg) rotateZ(0deg);
+    }
+}
+
+.codeblock {
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+    display: block;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: var(--monospace-font-family);
+    font-size: var(--code-font-size);
+    margin: 0;
+    --padding-vertical: .9em;
+    --padding-horizontal: 1.25em;
+    --border-radius: .5em;
+    border-radius: var(--border-radius);
+    background: #242628;
+    color: #FFFFFF;
+    --outdent: 0rem;
+    margin-left: calc(-1 * var(--outdent));
+    width: calc(100% + (2 * var(--outdent)));
+    max-width: calc(100% + (2 * var(--outdent)));
+    cursor: text;
+
+    --padding-vertical: 1.25em;
+    --padding-horizontal: 1.5em;
+    box-shadow: 0 1px 1px rgba(var(--shadow-color-rgb), .075), 0 .1333em .26667em rgba(var(--shadow-color-rgb), .075), 0 .2222em .66667em 0 rgba(var(--shadow-color-rgb), .075), 0 .4444em 1.3333em 0 rgba(var(--shadow-color-rgb), .075);
+
+}
+
+.codeblock>code {
+    display: block;
+    padding: var(--padding-vertical) var(--padding-horizontal);
+    font-family: inherit;
+    cursor: default;
+    cursor: text;
+
+}
+
+.codeblock b {
+    font-weight: 500;
+}
+
+.codeblock u {
+    -webkit-user-select: none;
+    user-select: none;
+    pointer-events: none;
+    text-decoration: none;
+    transition: opacity .25s ease;
+}
+
+.codeblock:hover u {
+    opacity: .25;
+}
