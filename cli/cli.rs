@@ -10,6 +10,7 @@ use utils::choose_enum;
 mod api;
 mod base;
 mod database;
+mod language;
 mod template_files;
 mod utils;
 mod web;
@@ -19,6 +20,7 @@ pub enum Categories {
     Web,
     Api,
     Database,
+    Language,
     Base,
 }
 
@@ -36,6 +38,7 @@ fn main() {
         Categories::Web => web::setup_web(base_options),
         Categories::Api => api::setup_api(base_options),
         Categories::Database => database::setup_database(base_options),
+        Categories::Language => language::setup_language(base_options),
         Categories::Base => base::template_base(base_options),
     }
 }

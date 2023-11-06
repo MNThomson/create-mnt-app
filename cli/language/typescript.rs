@@ -6,27 +6,27 @@ use crate::{base::template_base, template_files::templates_files, BaseTemplateOp
 use std::fs;
 
 #[derive(RustEmbed)]
-#[folder = "templates/api/fastapi"]
-struct FastapiTemplateFolder;
+#[folder = "templates/language/typescript"]
+struct TypescriptTemplateFolder;
 
 #[derive(Serialize)]
-struct FastapiOptions {
+struct TypescriptOptions {
     base: BaseTemplateOptions,
 }
 
-fn template_fastapi(base: BaseTemplateOptions) {
+fn template_typescript(base: BaseTemplateOptions) {
     let spinner: Spinach = Spinach::new("Generating Content");
 
     fs::create_dir_all(&base.project_name).ok();
 
     template_base(base.clone());
 
-    let context: FastapiOptions = FastapiOptions { base: base.clone() };
+    let context: TypescriptOptions = TypescriptOptions { base: base.clone() };
 
-    templates_files::<FastapiTemplateFolder, FastapiOptions>(base.project_name, &context);
+    templates_files::<TypescriptTemplateFolder, TypescriptOptions>(base.project_name, &context);
     spinner.succeed("Done Generating!");
 }
 
-pub fn setup_fastapi(base: BaseTemplateOptions) {
-    template_fastapi(base);
+pub fn setup_typescript(base: BaseTemplateOptions) {
+    template_typescript(base);
 }

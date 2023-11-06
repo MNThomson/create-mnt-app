@@ -1,0 +1,33 @@
+name: Lint
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+
+jobs:
+  black:
+    name: Black Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Black Lint
+        uses: psf/black@23.1.0
+        with:
+          src: "./"
+          options: "--check"
+
+  isort:
+    name: Isort Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Isort Lint
+        uses: isort/isort-action@v1.1.0
+        with:
+          sortPaths: "./"
+          configuration: "--check --color"

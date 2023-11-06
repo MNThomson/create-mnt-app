@@ -6,27 +6,27 @@ use crate::{base::template_base, template_files::templates_files, BaseTemplateOp
 use std::fs;
 
 #[derive(RustEmbed)]
-#[folder = "templates/api/fastapi"]
-struct FastapiTemplateFolder;
+#[folder = "templates/language/python"]
+struct PythonTemplateFolder;
 
 #[derive(Serialize)]
-struct FastapiOptions {
+struct PythonOptions {
     base: BaseTemplateOptions,
 }
 
-fn template_fastapi(base: BaseTemplateOptions) {
+fn template_python(base: BaseTemplateOptions) {
     let spinner: Spinach = Spinach::new("Generating Content");
 
     fs::create_dir_all(&base.project_name).ok();
 
     template_base(base.clone());
 
-    let context: FastapiOptions = FastapiOptions { base: base.clone() };
+    let context: PythonOptions = PythonOptions { base: base.clone() };
 
-    templates_files::<FastapiTemplateFolder, FastapiOptions>(base.project_name, &context);
+    templates_files::<PythonTemplateFolder, PythonOptions>(base.project_name, &context);
     spinner.succeed("Done Generating!");
 }
 
-pub fn setup_fastapi(base: BaseTemplateOptions) {
-    template_fastapi(base);
+pub fn setup_python(base: BaseTemplateOptions) {
+    template_python(base);
 }

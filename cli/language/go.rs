@@ -6,27 +6,27 @@ use crate::{base::template_base, template_files::templates_files, BaseTemplateOp
 use std::fs;
 
 #[derive(RustEmbed)]
-#[folder = "templates/api/fastapi"]
-struct FastapiTemplateFolder;
+#[folder = "templates/language/go"]
+struct GoTemplateFolder;
 
 #[derive(Serialize)]
-struct FastapiOptions {
+struct GoOptions {
     base: BaseTemplateOptions,
 }
 
-fn template_fastapi(base: BaseTemplateOptions) {
+fn template_go(base: BaseTemplateOptions) {
     let spinner: Spinach = Spinach::new("Generating Content");
 
     fs::create_dir_all(&base.project_name).ok();
 
     template_base(base.clone());
 
-    let context: FastapiOptions = FastapiOptions { base: base.clone() };
+    let context: GoOptions = GoOptions { base: base.clone() };
 
-    templates_files::<FastapiTemplateFolder, FastapiOptions>(base.project_name, &context);
+    templates_files::<GoTemplateFolder, GoOptions>(base.project_name, &context);
     spinner.succeed("Done Generating!");
 }
 
-pub fn setup_fastapi(base: BaseTemplateOptions) {
-    template_fastapi(base);
+pub fn setup_go(base: BaseTemplateOptions) {
+    template_go(base);
 }
