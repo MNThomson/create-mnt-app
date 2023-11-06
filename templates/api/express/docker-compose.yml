@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  express:
+    build: .
+    container_name: express
+    volumes:
+      - ./src:/app/src ## FOR DEV HOT RELOADING
+    ports:
+      - 3000:3000
