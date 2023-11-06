@@ -196,6 +196,7 @@ name = "create-mnt-app"
 version = "0.1.0"
 dependencies = [
  "dialoguer",
+ "duct",
  "names",
  "rust-embed",
  "serde",
@@ -285,6 +286,18 @@ checksum = "8168378f4e5023e7218c89c891c0fd8ecdb5e5e4f18cb78f38cf245dd021e76f"
 dependencies = [
  "block-buffer",
  "crypto-common",
+]
+
+[[package]]
+name = "duct"
+version = "0.13.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "37ae3fc31835f74c2a7ceda3aeede378b0ae2e74c8f1c36559fcc9ae2a4e7d3e"
+dependencies = [
+ "libc",
+ "once_cell",
+ "os_pipe",
+ "shared_child",
 ]
 
 [[package]]
@@ -562,6 +575,16 @@ name = "once_cell"
 version = "1.17.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b7e5500299e16ebb147ae15a00a942af264cf3688f47923b8fc2cd5858f23ad3"
+
+[[package]]
+name = "os_pipe"
+version = "1.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a53dbb20faf34b16087a931834cba2d7a73cc74af2b7ef345a4c8324e2409a12"
+dependencies = [
+ "libc",
+ "windows-sys 0.45.0",
+]
 
 [[package]]
 name = "os_str_bytes"
@@ -851,6 +874,20 @@ name = "serde"
 version = "1.0.153"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3a382c72b4ba118526e187430bb4963cd6d55051ebf13d9b25574d379cc98d20"
+dependencies = [
+ "serde_derive",
+]
+
+[[package]]
+name = "serde_derive"
+version = "1.0.153"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1ef476a5790f0f6decbc66726b6e5d63680ed518283e64c7df415989d880954f"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
 
 [[package]]
 name = "serde_json"
@@ -872,6 +909,16 @@ dependencies = [
  "cfg-if",
  "cpufeatures",
  "digest",
+]
+
+[[package]]
+name = "shared_child"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b0d94659ad3c2137fef23ae75b03d5241d633f8acded53d672decfa0e6e0caef"
+dependencies = [
+ "libc",
+ "winapi",
 ]
 
 [[package]]

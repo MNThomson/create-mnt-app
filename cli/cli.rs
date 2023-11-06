@@ -5,19 +5,15 @@ use std::str::FromStr;
 use strum::{EnumCount, IntoEnumIterator};
 use strum_macros::{Display, EnumCount, EnumIter, EnumString};
 
-use base::setup_base;
-
-mod astro;
 mod base;
 mod template_files;
-mod update;
 
-#[derive(Debug, EnumString, Display, Serialize, EnumIter, EnumCount)]
+#[derive(Debug, EnumString, Display, Serialize, EnumIter, EnumCount, Clone)]
 pub enum Template {
     Base,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 pub struct BaseTemplateOptions {
     project_name: String,
     template: Template,
@@ -25,14 +21,10 @@ pub struct BaseTemplateOptions {
 }
 
 fn main() {
-    get_project();
-}
-
-fn get_project() {
     let base_options = user_input();
 
     match base_options.template {
-        Template::Base => setup_base(base_options),
+        Template::Base => base::setup_base(base_options),
     }
 }
 
@@ -50,6 +42,15 @@ fn user_input() -> BaseTemplateOptions {
         project_name = format!("_{}", project_name)
     }
 
+    // Initialze git
+    let init_git_selections = &["Yes", "No"];
+    let init_git = Select::with_theme(&ColorfulTheme::default())
+        .with_prompt("Initialize a new git repository?")
+        .default(0)
+        .items(&init_git_selections[..])
+        .interact()
+        .unwrap();
+
     //Choose template
     let template_selections: [String; Template::COUNT] = Template::iter()
         .collect::<Vec<Template>>()
@@ -60,18 +61,9 @@ fn user_input() -> BaseTemplateOptions {
         .unwrap();
 
     let template = Select::with_theme(&ColorfulTheme::default())
-        .with_prompt("Pick your flavor")
+        .with_prompt("Template")
         .default(0)
         .items(&template_selections[..])
-        .interact()
-        .unwrap();
-
-    // Initialze git
-    let init_git_selections = &["Yes", "No"];
-    let init_git = Select::with_theme(&ColorfulTheme::default())
-        .with_prompt("Initialize a new git repository?")
-        .default(0)
-        .items(&init_git_selections[..])
         .interact()
         .unwrap();
 
