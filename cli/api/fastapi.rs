@@ -10,23 +10,23 @@ use std::fs;
 struct FastapiTemplateFolder;
 
 #[derive(Serialize)]
-struct AstroOptions {
+struct FastapiOptions {
     base: BaseTemplateOptions,
     npm_install: bool,
 }
 
 fn template_fastapi(base: BaseTemplateOptions) {
-    let spinner = Spinach::new("Generating Content");
+    let spinner: Spinach = Spinach::new("Generating Content");
 
     template_base(base.clone());
 
     fs::create_dir_all(&base.project_name).ok();
-    let context: AstroOptions = AstroOptions {
+    let context: FastapiOptions = FastapiOptions {
         base: base.clone(),
         npm_install: true,
     };
 
-    templates_files::<FastapiTemplateFolder, AstroOptions>(base.project_name, &context);
+    templates_files::<FastapiTemplateFolder, FastapiOptions>(base.project_name, &context);
     spinner.succeed("Done Generating!");
 }
 
