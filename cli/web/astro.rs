@@ -7,7 +7,7 @@ use crate::{base::template_base, template_files::templates_files, BaseTemplateOp
 use std::fs;
 
 #[derive(RustEmbed)]
-#[folder = "templates/astro"]
+#[folder = "templates/web/astro"]
 struct AstroTemplateFolder;
 
 #[derive(Serialize)]

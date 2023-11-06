@@ -2,17 +2,17 @@ use crate::{utils::choose_enum, BaseTemplateOptions};
 use serde::Serialize;
 use strum_macros::{Display, EnumCount, EnumIter, EnumString};
 
-mod astro;
+mod fastapi;
 
 #[derive(Debug, EnumString, Display, Serialize, EnumIter, EnumCount, Clone)]
-pub enum WebTemplates {
-    Astro,
+pub enum ApiTemplates {
+    Fastapi,
 }
 
-pub fn setup_web(base: BaseTemplateOptions) {
-    let template = choose_enum::<WebTemplates>();
+pub fn setup_api(base: BaseTemplateOptions) {
+    let template = choose_enum::<ApiTemplates>();
 
     match template {
-        WebTemplates::Astro => astro::setup_astro(base),
+        ApiTemplates::Fastapi => fastapi::setup_fastapi(base),
     }
 }
