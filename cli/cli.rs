@@ -7,16 +7,18 @@ use strum_macros::{Display, EnumCount, EnumIter, EnumString};
 
 mod base;
 mod template_files;
+mod web;
 
 #[derive(Debug, EnumString, Display, Serialize, EnumIter, EnumCount, Clone)]
-pub enum Template {
+pub enum Categories {
+    Web,
     Base,
 }
 
 #[derive(Debug, Serialize, Clone)]
 pub struct BaseTemplateOptions {
     project_name: String,
-    template: Template,
+    template: Categories,
     init_git: bool,
 }
 
@@ -24,7 +26,8 @@ fn main() {
     let base_options = user_input();
 
     match base_options.template {
-        Template::Base => base::setup_base(base_options),
+        Categories::Web => web::setup_web(base_options),
+        Categories::Base => base::template_base(base_options),
     }
 }
 
@@ -52,8 +55,8 @@ fn user_input() -> BaseTemplateOptions {
         .unwrap();
 
     //Choose template
-    let template_selections: [String; Template::COUNT] = Template::iter()
-        .collect::<Vec<Template>>()
+    let template_selections: [String; Categories::COUNT] = Categories::iter()
+        .collect::<Vec<Categories>>()
         .iter()
         .map(|x| x.to_string())
         .collect::<Vec<String>>()
@@ -61,7 +64,7 @@ fn user_input() -> BaseTemplateOptions {
         .unwrap();
 
     let template = Select::with_theme(&ColorfulTheme::default())
-        .with_prompt("Template")
+        .with_prompt("Which category?")
         .default(0)
         .items(&template_selections[..])
         .interact()
@@ -69,7 +72,7 @@ fn user_input() -> BaseTemplateOptions {
 
     return BaseTemplateOptions {
         project_name: project_name,
-        template: Template::from_str(&template_selections[template]).unwrap(),
+        template: Categories::from_str(&template_selections[template]).unwrap(),
         init_git: if init_git == 0 { true } else { false },
     };
 }
